@@ -1,0 +1,17 @@
+{
+  "name": "dns-character-string",
+  "version": "0.1.0",
+  "description": "Encodes and decodes the length-prefixed character-string format used in DNS TXT and HINFO records.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {}
+}
