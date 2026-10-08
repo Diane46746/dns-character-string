@@ -23,3 +23,10 @@ The single-length-octet design caps a character-string at 255 bytes of body. If 
 Text is UTF-8 encoded by `TextEncoder` and decoded with `TextDecoder` in fatal mode, so a truncated multi-byte sequence surfaces as an error rather than silent replacement. This is the awkward edge: TXT records are in practice opaque byte bags, and well-meaning callers sometimes put binary data in them. If you have such a payload, base64-encode it before passing it here; the library will not second-guess your bytes.
 
 The non-strict decoder consumes only the bytes the length prefix declares and leaves any trailing data for the caller. The strict variant throws `code: "TRAILING_DATA"` if even one byte remains, which is what you want when a buffer is supposed to contain exactly one character-string.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
